@@ -1,0 +1,227 @@
+CSVS vs DVCS
+git init
+git init --bare <Bare repo> <Remote Repository>
+contents of .git
+
+branches/
+config
+description
+FETCH_HEAD
+HEAD
+hooks/
+info/
+objects/
+refs/
+
+=================================
+
+Git Visualization -> https://git-school.github.io/visualizing-git/#free 
+
+touch firstfile.txt
+
+git status 
+git status -s
+
+git add
+git status 
+git status -s
+
+git reset
+git reset <file name>
+
+touch secondfile.txt
+touch thirdfile.txt
+
+touch fourthfile.txt
+touch fifthfile.txt
+echo "firstfile.txt" > .gitignore
+
+.gitignore -> https://www.w3schools.com/git/git_ignore.asp?remote=github
+
+=================================
+
+git config --global user.name "Iam-Munna"
+git config --global user.email "mithranmartin@yahoo.com" 
+
+git commit -m "First Commit"
+git log
+git log --oneline
+git show <commit id>
+
+git commit --amend -m "2nd Commit" -> https://smartlogic.io/blog/git-commit-amend/
+
+git config --global user.name "Iam-mithran"
+git config --global user.email "martinmithran@gmail.com"
+git commit --amend --reset-author --no-edit
+
+touch firstfile.txt
+touch secondfile.txt
+git add firstfile.txt
+git rm secondfile.txt
+git commit --amend --no-edit
+
+=================================
+
+git commit -m "Second Commit"
+git commit -m "Third Commit"
+git commit -m "Fourth Commit"
+
+git branch X
+git checkout -b Y
+git branch
+git branch -d <branch name>
+git checkout X
+
+=================================
+
+git commit -m "Second Commit"
+git commit -m "Third Commit"
+git commit -m "Fourth Commit"
+
+git reset HEAD~2
+git commit -m "Third Commit"
+git reflog
+git checkout -b <branchname> <Commit id>
+
+git commit -m "Second Commit"
+git commit -m "Third Commit"
+git commit -m "Fourth Commit"
+
+git revert HEAD~2
+
+https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-local-commits-in-git
+
+=================================
+
+git commit -m "Second Commit"
+git commit -m "Third Commit"
+git commit -m "Fourth Commit"
+
+git branch X
+git checkout X
+
+git commit -m "Fifth Commit"
+
+git checkout master
+git commit -m "Sixth Commit"
+git commit -m "Seventh Commit"
+git merge X
+
+=================================
+
+(fast forward merge)
+
+git commit -m "Second Commit"
+git commit -m "Third Commit"
+git commit -m "Fourth Commit"
+
+git branch X
+git checkout X
+
+git commit -m "Fifth Commit"
+git commit -m "Sixth Commit"
+
+git checkout master
+git merge X
+
+=================================
+
+git commit -m "Second Commit"
+git commit -m "Third Commit"
+git commit -m "Fourth Commit"
+
+git checkout -b Y
+
+git commit -m "fifth Commit"
+git commit -m "sixth Commit"
+git commit -m "seventh Commit"
+
+git checkout master
+
+git commit -m "5th Commit"
+git commit -m "6th Commit"
+
+git rebase Y
+
+=================================
+
+git commit -m "Second Commit"
+git commit -m "Third Commit"
+git commit -m "Fourth Commit"
+
+git checkout -b Y
+
+git commit -m "fifth Commit"
+git commit -m "sixth Commit"
+git commit -m "seventh Commit"
+
+git checkout master
+
+git commit -m "5th Commit"
+git commit -m "6th Commit"
+
+git checkout Y
+git rebase master
+
+perform forward merge
+
+=================================
+
+git commit -m "Second Commit"
+git commit -m "Third Commit"
+git commit -m "Fourth Commit"
+
+git checkout -b Y
+
+git commit -m "fifth Commit"
+git commit -m "sixth Commit"
+
+git checkout master
+
+git commit -m "5th Commit"
+git commit -m "6th Commit"
+
+git cherry-pick <commit id>
+
+=================================
+
+Upstream changes
+
+git pull vs git fetch
+git pull => git fetch + git merge
+git tag special
+
+git push origin master
+
+=================================
+
+git diff -> difference between staging area and working directory
+git diff HEAD^ HEAD
+git diff <commit-id> <commit-id>
+
+=================================
+
+git stash 
+git stash pop
+git stash list
+git stash pop stash@{0}
+git stash drop          
+git stash drop stash@{n}
+
+=================================
+
+git Branching Strategy - GIT FLOW
+
+
+TASK: ssh-based Loging vs Auth Token
+TASK: PULL REQUEST
+TASK: git merge tool for Handling conflicts
+TASK: git merge --sqaush vs Cherry-pick ?
+
+
+
+
+
+
+
+

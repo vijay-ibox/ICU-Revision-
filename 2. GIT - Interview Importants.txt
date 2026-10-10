@@ -1,0 +1,88 @@
+SDLC => Scrum FrameWork
+
+Product Owner => FrostBite Person
+Product Backlog => Features for the entire project
+Sprint Backlog/Goal => Features to be completed in the sprint Cycle
+Sprint Cycle => 2 weeks
+Daily Stand Up => Daily short meetings
+Sprint Review => Demo Session with Product Owner 
+Sprint RetroSpective => discuss what worked and what didn’t work in a sprint
+
+Infosys => DevopsEngg
+Client/project => FrostBite
+Requirements => Build Webapplication, Store Customer Details
+
+
+2 weeks of Sprint 
+ - Monday - Friday (week 1)
+ - Monday - Friday (week 2) (Friday - Maintainance Window)
+
+Non-prod Env => Dev,QA,UAT
+Prod Env => Staging/Pre-Prod, Prod, DR
+
+==================================================
+
+Git Branching Strategy
+
+Version Number - 3.5.7
+ - 3 major release
+ - 5 minor release
+ - 7 patch/bug release
+
+
+Pull request/ Merge request
+
+2 dev => Feature branch
+1 dev => Feature branch
+
+Feature branch => dev branch (Pull req > merge)
+
+==================================================
+
+Git Questions:
+
+HIGHLY IMPORTANT:
+
+Git Branching Strategy / GIT FLOW ?
+Git Stash ?
+Git pull vs fetch vs clone ?
+  git pull = git fetch + git merge
+how does github triggers jenkins pipeline ? ans : pollscm & webhook
+git merge vs git rebase ?
+how do you resolve a conflit ?
+  git mergetool - vim
+
+=====================================================================
+
+FREQUENTLY ASKED:
+
+CVCS - SVN vs DVCS - Git
+what are the contents of .git ?
+Git init --bare / what is bare repo in git ?
+How do you generate a Auth Token ?
+how do you you change a existing log message ?
+  git commit --amend
+  git commit --amend --reset-author
+how do you revert git add ?
+  git reset HEAD
+How do you revert a commit ?
+  git revert 
+  git reset --hard
+  git reset --mixed
+  git reset --soft
+How do you recover a deleted branch ?
+  git checkout -b <your-branch> <sha>
+what is .gitignore ?
+git cherrypick ?
+git tag ?	
+git config ?
+git forking ?
+
+=====================================================================
+
+RARE BUT HAVE TO KNOW:
+
+git reflog ?
+git diff ?
+git status ?
+git squash ?

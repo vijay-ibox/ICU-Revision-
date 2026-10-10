@@ -1,0 +1,339 @@
+1. A file is committed by mistake. How do you remove it?
+
+Scenario 1: File is only committed locally (not pushed)
+
+Remove it from Git but keep it locally:
+git rm --cached filename
+git commit --amend
+
+If you want to completely delete it:
+git rm filename
+git commit -m "Removed unwanted file"
+
+Scenario 2: Already pushed to remote
+
+If it contains sensitive information:
+git rm --cached filename
+git commit -m "Remove sensitive file"
+git push
+
+Interview Answer:
+
+If the file is committed locally, I remove it using `git rm --cached` and amend the commit if required. If it has already been pushed, I commit the deletion and push it. If the file contains sensitive information like AWS keys, I immediately rotate the credentials, clean the Git history using Git Filter Repo or BFG, and then force push after informing the team.
+
+2. Two developers modified the same file. How do you resolve the conflict?
+
+This happens during:
+
+* Merge
+* Pull
+* Rebase
+
+Scenario 1: Through vi editor
+Steps:
+git status
+
+Open the file.
+
+Edit manually.
+
+Remove conflict markers.
+
+Stage it.
+
+git add file
+
+Complete merge
+
+git commit
+
+Scenario 2: Use Git merge tool or through VS Code we can solve
+
+Interview Answer:
+
+When two developers modify the same lines, Git cannot decide automatically and raises a merge conflict. I first run `git status` to identify conflicting files, manually edit the conflict markers, keep the correct code, stage the changes with `git add`, and then complete the merge or continue the rebase.
+
+3. How do you undo the last commit without losing changes?
+
+Keep changes staged
+git reset --soft HEAD~1
+
+Keep changes unstaged
+git reset HEAD~1
+
+Interview Answer:
+
+If I want to undo only the last commit but retain my code, I use `git reset --soft HEAD~1` to keep changes staged. If I want them unstaged, I use `git reset --mixed HEAD~1`.
+
+4. Explain your team's Git branching strategy.
+
+master
+│
+develop
+│
+├── feature/login
+├── feature/payment
+├── feature/api
+│
+release
+│
+hotfix
+
+Flow:
+Developer creates (feature branch)
+↓
+Raises Pull Request
+↓
+Code Review
+↓
+Merge into develop
+↓
+Testing
+↓
+Release branch
+↓
+Production (master)
+
+Urgent fixes (hotfix branch)
+
+Interview Answer:
+
+We follow a Git Flow branching strategy. The main branch always contains production-ready code. Developers create feature branches from the develop branch. After development, they raise pull requests, and after code review, changes are merged into develop. Release branches are created for UAT and production deployments, while hotfix branches are used for urgent production issues.
+
+# 5. How to trigger Jenkins pipeline via GitHub?
+
+2 types of trigger:
+1. GitHub Webhooks
+2. GITScm polling
+
+Developer pushes code
+↓
+GitHub Webhook
+↓
+Jenkins receives webhook
+↓
+Pipeline starts automatically
+
+Steps:
+GitHub - Settings - Webhook (http://jenkins-url/github-webhook/)
+
+Interview Answer:
+
+We configure GitHub Webhooks pointing to Jenkins. Whenever a developer pushes code or raises a pull request, GitHub sends an HTTP POST request to Jenkins, which automatically triggers the configured pipeline.
+
+6. Difference between git fetch and git pull
+
+| git fetch                   | git pull                   |
+| --------------------------- | -------------------------- |
+| Downloads latest changes    | Downloads + merges         |
+| Doesn't change working code | Updates current branch     |
+
+Interview Answer:
+
+Git fetch only downloads changes from the remote repository without modifying my working branch. Git pull performs both fetch and merge, updating my local branch immediately.
+
+7. Merge vs Rebase
+
+Merge keeps history.
+
+Rebase creates linear history.
+
+Merge never rewrites history.
+
+Rebase rewrites commit history.
+
+Interview Answer:
+
+Merge combines two branches by creating a merge commit and preserves complete history. Rebase moves feature branch commits on top of another branch, creating a cleaner linear history. We usually use rebase before raising pull requests and merge for integrating branches.
+
+8. How do you restrict users from committing directly to a branch?
+
+Using, Branch Protection Rules
+
+Require
+
+* Pull Request
+* Code Review
+* Status Checks
+* Build Success
+
+Interview Answer:
+
+We configure Branch Protection Rules on GitHub. Direct pushes to the main branch are disabled. Developers must raise pull requests, obtain approvals, and pass Jenkins build validation before merging.
+
+9. When will you use Cherry Pick?
+
+
+git cherry-pick commitID
+
+Interview Answer:
+
+Cherry-pick is used when I want to apply a specific commit from one branch to another without merging the entire branch. It's commonly used for hotfixes or selectively moving bug fixes.
+
+10. Git Revert vs Git Reset
+
+| Reset            | Revert                 |
+| ---------------- | ---------------------- |
+| Removes commits  | Creates reverse commit |
+| Rewrites history | Preserves history      |
+
+Interview Answer:
+
+Git reset moves the branch pointer backward and is mainly used before sharing commits. Git revert is safer for shared branches because it creates a new commit that reverses the previous changes without rewriting history.
+
+11. Command to list logs in one line
+
+git log --oneline
+
+# 12. What is .gitignore?
+
+It tells Git Don't track these files.
+
+Example:
+*.log
+.env
+node_modules/
+target/
+
+Interview Answer:
+
+The .gitignore file specifies files and directories that Git should ignore. It prevents unnecessary or sensitive files such as logs, environment files, dependencies, and build artifacts from being committed.
+
+13. AWS Secret pushed to GitHub. What will you do?
+
+Immediately Delete/Rotate Key
+↓
+Remove key from code
+↓
+Clean Git History
+↓
+Force Push
+↓
+Update .gitignore
+↓
+Audit CloudTrail
+
+Interview Answer:
+
+My first action is to deactivate or rotate the compromised AWS access key because deleting the file alone doesn't remove it from Git history. Next, I remove the secret from the repository history using Git Filter Repo or BFG Repo Cleaner, force push the cleaned history, update `.gitignore` if necessary, and review AWS CloudTrail logs for any unauthorized usage.
+
+14. Compare two commits
+
+git diff commit1 commit2
+
+15. View detailed information about a commit
+
+git show commitID
+
+Shows
+
+* Author
+* Date
+* Commit message
+* Code changes
+
+16. Connect local repository to GitHub
+
+Add remote:
+git remote add origin https://github.com/user/repo.git
+git push origin main
+
+Interview Answer:
+
+After initializing the repository with `git init`, I add the remote repository using `git remote add origin <repository-url>`, and then push my local branch using `git push origin main`.
+
+17. What happens when git init is executed?
+
+Git creates .git folder Contains:
+
+* Objects
+* References
+* Branches
+* HEAD
+* Configuration
+* Commit history
+
+Current directory becomes a Git repository.
+
+Interview Answer:
+
+The `git init` command initializes a new Git repository by creating a hidden `.git` directory that stores all repository metadata, objects, commit history, branch references, and configuration. After initialization, Git starts tracking changes in that directory.
+
+18. What is Git Stash?
+
+Temporary storage.
+
+Commands:
+git stash
+git stash list
+git stash apply
+git stash pop
+git stash drop
+git stash clear
+
+Interview Answer:
+
+Git stash temporarily saves uncommitted changes without committing them. It is useful when I need to switch branches quickly to work on another task and later restore my changes using `git stash apply` or `git stash pop`.
+
+19. What is PAT?
+
+Personal Access Token Used instead of password.
+
+Advantages
+
+* More secure
+* Expiration
+* Fine-grained permissions
+* Can revoke anytime
+
+Interview Answer:
+
+GitHub no longer supports password authentication for Git operations over HTTPS. Instead, we use a Personal Access Token (PAT), which acts like a secure password with configurable scopes and expiration. It provides better security and can be revoked if compromised.
+
+20. Git vs GitHub
+
+| Git                    | GitHub                          |
+| ---------------------- | ------------------------------- |
+| Version Control System | Git repository hosting platform |
+| Installed locally      | Cloud platform                  |
+| Tracks code changes    | Stores Git repositories         |
+| Offline support        | Collaboration features          |
+| Branches               | Pull Requests                   |
+
+Interview Answer:
+
+Git is a distributed version control system used to track source code changes locally, while GitHub is a cloud-based platform that hosts Git repositories and provides collaboration features such as pull requests, code reviews, branch protection, issue tracking, and CI/CD integrations.
+
+21. What is Git Squash?
+
+Squash combines multiple commits into a single commit.
+
+Example:
+Before:
+Commit 1 - Created login page
+Commit 2 - Fixed login bug
+Commit 3 - Updated CSS
+Commit 4 - Fixed typo
+
+After squashing:
+Command:
+git rebase -i HEAD~4
+Open a interactive editor:
+
+```text
+pick a1b2c3 Created login page
+squash d4e5f6 Fixed login bug
+squash g7h8i9 Updated CSS
+squash j0k1l2 Fixed typo
+```
+
+Save, edit the final commit message, and complete the rebase.
+
+Why use squash?
+
+* Keeps commit history clean.
+* Removes unnecessary "fix typo" or "small fix" commits.
+* Makes code reviews easier.
+* Produces a single meaningful commit before merging a feature branch.
+
+Interview Answer:Git squash combines multiple related commits into a single commit, usually through interactive rebase (`git rebase -i`). We commonly squash feature branch commits before merging to maintain a clean and readable commit history. For example, instead of having several small commits like "fix typo" or "update CSS", we create one meaningful commit such as "Implement User Authentication".

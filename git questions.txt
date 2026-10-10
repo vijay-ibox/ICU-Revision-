@@ -1,0 +1,228 @@
+1, what is git --> CLI
+===========
+Git is a distributed version control system commonly used for tracking changes in source code during software development. It allows multiple developers to collaborate on projects simultaneously.
+
+2, what is github --> GUI
+===============
+GitHub is a web-based platform built around Git, the version control system. It adds a layer of collaboration features on top of Git, making it easier for developers to work together on projects. 
+
+3, Diff between git and github
+==========================
+Git:
+
+Git is a distributed version control system.
+It is a command-line tool that tracks changes in source code files over time.
+Developers use Git to manage and track changes locally on their computers.
+Git allows for branching, merging, committing changes, and maintaining version history.
+It does not require an internet connection to function (except for certain operations like pushing or pulling changes from remote repositories).
+GitHub:
+
+GitHub is a web-based platform that provides hosting for Git repositories.
+It offers additional collaboration and project management features on top of Git.
+Developers use GitHub to host their Git repositories in the cloud, making them accessible from anywhere with an internet connection.
+GitHub facilitates collaboration among developers through features like pull requests, code reviews, and issue tracking.
+It provides a social networking aspect, allowing developers to follow each other, star repositories, and contribute to open source projects.
+GitHub integrates with various third-party tools and services, such as continuous integration platforms and project management tools.
+GitHub also includes features for documentation, wikis, and issue tracking.
+
+4, What is git merge
+=================
+In Git, a merge is the process of combining changes from different branches into a single branch. This is typically done to integrate the changes made in one branch (often a feature branch) back into another branch (often the main branch, such as master or main).
+
+Select Branches: To perform a merge, you first select the branch where you want to integrate changes (the target branch) and the branch from which you want to bring changes (the source branch).
+
+git checkout target_branch
+git merge source_branch
+
+5, What is git rebase
+==================
+In Git, a rebase is a command used to integrate changes from one branch onto another branch by reapplying each commit on the destination branch. Unlike merging, which creates a merge commit to combine the changes, rebasing rewrites the commit history to make it appear as if the commits were made directly on top of the destination branch.
+
+Select Branches: To perform a rebase, you first select the branch you want to rebase (the source branch) and the branch onto which you want to reapply the changes (the target branch).
+
+git checkout source_branch
+git rebase target_branch
+
+6, Git merge vs git rebase
+======================
+Git merge and Git rebase are both methods used to integrate changes from one branch into another in Git, but they achieve this in different ways and have different implications for the commit history.
+
+Merge creates a new merge commit, which combines the changes from the source branch into the target branch. This creates a merge point in the commit history, preserving the history of both branches.
+
+Rebase rewrites the commit history of the source branch by replaying each commit on top of the target branch. This creates a linear sequence of commits without merge commits.
+
+7, Diff between fork, clone, fetch, pull
+=================================
+Fork:
+
+Forking is a feature specific to platforms like GitHub and GitLab.
+Forking creates a copy of a repository under your GitHub or GitLab account, allowing you to freely experiment with changes without affecting the original repository.
+Forking is often used in open-source development when you want to contribute to a project without directly having write access to the original repository.
+Clone:
+
+Cloning creates a local copy of a repository on your own machine.
+It copies the entire repository, including its files, commit history, branches, and tags.
+Cloning is typically done when you want to start working on a project, either by yourself or as part of a team.
+It's done using the git clone command followed by the URL of the repository you want to clone.
+Fetch:
+
+Fetching retrieves changes from a remote repository to your local repository without merging them into your current branch.
+It updates your local repository's remote tracking branches, allowing you to see changes made by others.
+Fetching is useful for keeping your local repository up to date with changes made by collaborators.
+It's done using the git fetch command.
+Pull:
+
+Pulling is a combination of fetching changes and merging them into your current branch.
+It fetches changes from the remote repository and then automatically merges them into your local branch.
+Pulling is a convenient way to update your local repository with changes from the remote repository while also incorporating those changes into your current working branch.
+It's done using the git pull command, which internally performs a git fetch followed by a git merge or git rebase, depending on your Git configuration.
+
+8, What is branch
+===============
+In Git, a branch is a lightweight movable pointer that points to a specific commit. It represents an independent line of development within a Git repository. Each branch in a repository can contain its own commits, allowing developers to work on separate features, fixes, or experiments concurrently without interfering with each other.
+
+9, What is git push
+================
+git push is a Git command used to upload local repository content to a remote repository. When you make changes to your local repository, such as creating new commits or branches, you may want to synchronize these changes with a remote repository hosted on a server, such as GitHub, GitLab,
+
+10, what is git stash
+=================
+git stash is a Git command used to temporarily store changes that are not ready to be committed to a branch. It allows you to save your work in progress, clean up your working directory, and switch to another branch or task without committing incomplete changes.
+
+11, how many ways we clone our git repo
+====================================
+* HTTPS
+* SSH --> we update our public key
+
+12, what is .gitignore
+==================
+.gitignore is a file used by Git to specify intentionally untracked files that Git should ignore. When you're working on a project, there are often files or directories that you don't want to include in version control, such as build artifacts, temporary files, or sensitive configuration files. The .gitignore file allows you to list these files and patterns so that Git knows to ignore them when you perform operations like git status, git add, and git commit
+
+13, diff between git stash pop and git stash apply
+==========================================
+git stash pop:
+
+Applies the most recently stashed changes to the working directory.
+Removes the applied stash from the stash stack.
+Equivalent to running git stash apply followed by git stash drop
+
+git stash apply:
+
+Applies the most recently stashed changes to the working directory.
+Leaves the applied stash intact in the stash stack.
+Allows you to apply the same stash multiple times if needed.
+
+14, git cherrypick
+===============
+git cherry-pick is a Git command used to apply a specific commit from one branch to another. It allows you to select a single commit and "cherry-pick" it onto another branch, incorporating the changes introduced by that commit into the current branch's commit history.
+
+15, git pull request
+================
+
+A "pull request" (often abbreviated as "PR") is a feature commonly associated with distributed version control systems like Git, particularly when using platforms like GitHub, GitLab, or Bitbucket. It is a way for developers to submit proposed changes to a project's codebase for review and integration into the main branch.
+
+16, branching strategy
+===================
+17, git squash
+============
+Git squash is a technique used to combine multiple commits into a single commit with a clean, concise history. It's particularly useful when you have a series of commits that logically belong together and you want to present them as a single, cohesive change in your project's history.
+
+18, how to revert a previous commit in git
+=====================================
+git revert <commit-hash>
+
+git reflog to find the commit hash
+
+19, Git soft reset and hard reset
+===========================
+Soft Reset:
+
+A soft reset moves the HEAD and the current branch pointer to the specified commit, but it doesn't modify the working directory or staging area.
+It effectively "un-commits" changes by resetting the commit history to the specified commit, but the changes introduced by those commits remain in the working directory and staging area, allowing you to re-commit them if needed.
+Use git reset --soft <commit> to perform a soft reset.
+
+Hard Reset:
+
+A hard reset moves the HEAD and the current branch pointer to the specified commit and resets the working directory and staging area to match the state of the specified commit.
+It effectively discards any changes made after the specified commit, reverting the working directory and staging area to the exact state of the specified commit.
+Use git reset --hard <commit> to perform a hard reset.
+
+20,Command to create a branch and delete the branch and rename the branch
+===================================================================
+
+git checkout -b <branch-name>
+
+git branch -d <branch-name>
+
+git branch -m <current-branch-name> <new-branch-name>
+
+
+21, command to restore the deleted branch
+======================================
+git checkout -b <restored-branch-name> <1326a1f>
+
+git reflog
+
+22, command to check the merged and unmerged branches
+===================================================
+git branch --merged
+git branch --no-merged
+
+23, how to restrict the commit on github
+===================================
+Branch Protection Rules:
+
+Navigate to your repository on GitHub.
+Go to the "Settings" tab.
+In the sidebar, click on "Branches."
+Under "Branch protection rules," click "Add rule" or select an existing rule.
+Choose the branch you want to protect (e.g., main, master, or specific feature branches).
+Enable the "Require pull request reviews before merging" option. This ensures that changes must be reviewed and approved via pull requests before being merged into the protected branch.
+Optionally, you can enable other restrictions such as requiring status checks to pass, enforcing branch administrators, or requiring signed commits.
+Click "Create" or "Save changes" to apply the branch protection rule.
+
+24, what is the command to create/delete/rename a user in git
+======================================================
+create
+======
+git config --global user.name "Your Name"
+
+git config --global user.email "your_email@example.com"
+
+delete
+======
+git config --global --unset user.name
+
+git config --global --unset user.email
+
+rename
+=======
+git config --global user.name "New Name"
+
+git config --global user.email "new_email@example.com"
+
+25, Diff between SVN and GIT
+=========================
+
+Centralized vs. Distributed
+
+SVN is centralized, meaning that there is a single central repository that stores the entire version history of the project. Developers typically check out a working copy from this central repository and commit changes directly to it.
+Git is distributed, meaning that every developer has a local copy of the entire repository, including the complete version history. Developers can work offline, commit changes locally, and synchronize with remote repositories as needed.
+
+
+Tasks
+=====
+what is github actions and how it works
+Diff between github and github actions? diff between github actions and jenkins
+when do you use git rebase instead of using git merge
+what is the command to modify or change the commit
+how to disable forking in Git
+how will you secure your github account
+how will you resolve merge conflicts
+
+
+
+
+
+
+
